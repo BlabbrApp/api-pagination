@@ -49,7 +49,7 @@ module ApiPagination
       end
 
       collection = Kaminari.paginate_array(collection, paginate_array_options) if collection.is_a?(Array)
-      collection.page(options[:page]).per(options[:per_page])
+      collection.page(options[:page]).per(options[:per_page]).without_count
     end
 
     def paginate_with_will_paginate(collection, options)
