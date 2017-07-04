@@ -29,24 +29,24 @@ module Rails
 
       collection = ApiPagination.paginate(collection, options)
 
-      links = (headers['Link'] || "").split(',').map(&:strip)
+#       links = (headers['Link'] || "").split(',').map(&:strip)
       url   = request.original_url.sub(/\?.*$/, '')
       pages = ApiPagination.pages_from(collection)
 
       pages.each do |k, v|
         new_params = request.query_parameters.merge(:page => v)
-        links << %(<#{url}?#{new_params.to_param}>; rel="#{k}")
+#         links << %(<#{url}?#{new_params.to_param}>; rel="#{k}")
       end
 
       total_header    = ApiPagination.config.total_header
       per_page_header = ApiPagination.config.per_page_header
       page_header     = ApiPagination.config.page_header
-      include_total   = ApiPagination.config.include_total
+#       include_total   = ApiPagination.config.include_total
 
-      headers['Link'] = links.join(', ') unless links.empty?
+#       headers['Link'] = links.join(', ') unless links.empty?
       headers[per_page_header] = options[:per_page].to_s
       headers[page_header] = options[:page].to_s unless page_header.nil?
-      headers[total_header] = total_count(collection, options).to_s if include_total
+#       headers[total_header] = total_count(collection, options).to_s if include_total
 
       return collection
     end
