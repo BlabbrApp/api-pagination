@@ -26,7 +26,7 @@ module ApiPagination
         end
 
         unless collection.last_page? || (ApiPagination.config.paginator == :kaminari && collection.out_of_range?)
-          pages[:last] = collection.total_pages
+          pages[:last] = 0 # (nope bc without_count) collection.total_pages
           pages[:next] = collection.current_page + 1
         end
       end
